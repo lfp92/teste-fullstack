@@ -33,9 +33,13 @@ function getUsuario(id = 0) {
     return executeQuery('select usuario_id id, usuario_nome nome, usuario_email email, usuario_celular celular from usuarios where usuario_id = ?', [id])
 }
 
+function login(email, senha) {
+    return executeQuery('select usuario_id id, usuario_nome nome, usuario_email email, usuario_celular celular from usuarios where usuario_email = ? and usuario_senha = md5(?)', [email, senha]);
+}
+
 function listUsuarios() {
     return executeQuery('select usuario_id id, usuario_nome nome, usuario_email email, usuario_celular celular from usuarios');
 }
 
 
-module.exports = { addUsuario, changePassword, deleteUsuario, editUsuario, getUsuario, listUsuarios }
+module.exports = { addUsuario, changePassword, deleteUsuario, editUsuario, getUsuario, login, listUsuarios }

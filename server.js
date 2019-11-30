@@ -19,6 +19,12 @@ app.use((req, res, next) => {
 });
 
 io.on('connection', function (socket) {
+
+    socket.on('loggedIn', usuario => {
+        usuario.socketId = socket.id;
+        console.log(usuario)
+    });
+
     socket.on('sendMessage', message => {
         socket.broadcast.emit('receivedMessage', message);
     })

@@ -33,9 +33,13 @@ function getUser(id = 0) {
     return request('/usuario/get?id=' + id, 'GET');
 }
 
+function login(email, senha) {
+    return request('/usuario/login', 'POST', { email, senha });
+}
+
 function listUsers() {
     return request('/usuario/list', 'GET');
 }
 
 
-export { addUser, changePassword, deleteUser, editUser, getUser, listUsers }
+export { addUser, changePassword, deleteUser, editUser, getUser, login, listUsers }

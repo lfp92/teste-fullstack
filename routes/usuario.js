@@ -44,6 +44,19 @@ router.get('/get', function (req, res) {
         .catch(error => res.send(error));
 });
 
+router.post('/login', function (req, res) {
+    let { email, senha } = req.body;
+    dbUsuario.login(email, senha)
+        .then(results => {
+            if (Array.from(results).length === 0) {
+                res.send({ mensagem: 'Usuário ou senha inválidos!' });
+            } else {
+                res.send(results);
+            }
+        })
+        .catch(error => res.send(error));
+});
+
 router.get('/list', function (req, res) {
     dbUsuario.listUsuarios()
         .then(results => res.send(results))

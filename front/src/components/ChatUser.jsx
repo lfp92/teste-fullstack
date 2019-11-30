@@ -4,9 +4,14 @@ import openSocket from 'socket.io-client';
 const socket = openSocket('localhost:4000');
 
 let i = 0;
+
 export default function () {
     let [message, setMessage] = useState('');
     let [todos, setTodos] = useState([]);
+
+    socket.emit('loggedIn', {
+        usuario: 'Leonardo'
+    });
 
     socket.on('receivedMessage', (m) => {
         let arr = todos.map(e => e);
