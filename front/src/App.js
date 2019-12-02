@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import UsuarioList from './components/admin/UsuarioList';
+import UsuarioDetails from './components/admin/UsuarioDetails';
+import Login from './components/Login';
+import ChatUser from './components/messenger/ChatUser';
 import './App.css';
 
 function App() {
+  let [autenticado, setAutenticado] = useState(false);
+  
+  function ss(value) {
+    console.log(1223)
+    setAutenticado(value)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {autenticado ?
+        <Login autenticado={autenticado} setAutenticado={ss} t={'NAO FUNCIONA'} /> :
+        <ChatUser />
+      }
     </div>
   );
 }

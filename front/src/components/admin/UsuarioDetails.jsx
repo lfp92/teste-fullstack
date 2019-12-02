@@ -1,5 +1,5 @@
 import React from 'react';
-import { addUser, changePassword, deleteUser, editUser, getUser } from '../services/services';
+import { addUser, changePassword, deleteUser, editUser, getUser } from '../../services/services';
 
 class UsuarioDetails extends React.Component {
     constructor(props) {

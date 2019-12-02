@@ -1,0 +1,8 @@
+.texto, .msg {
+    background-color: #fff;
+    width: 40vw;
+}
+
+.msg {
+    margin-top: 10px;
+}

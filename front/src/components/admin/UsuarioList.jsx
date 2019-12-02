@@ -1,5 +1,6 @@
 import React from 'react';
-import { listUsers } from '../services/services';
+import './UsuarioList.css';
+import { listUsers } from '../../services/services';
 import UsuarioDetails from './UsuarioDetails';
 
 let listKey = 0;

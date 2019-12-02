@@ -1,0 +1,14 @@
+.login-container {
+    border: 1px solid green;
+    padding: 1vw;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 4.5vh);
+    width: 20vw;
+    margin: 0 auto;
+}
+
+.login-container input {
+    padding: .1vw;
+}

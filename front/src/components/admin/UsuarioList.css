@@ -1,0 +1,9 @@
+.grid-container {
+  margin: 0 auto;
+  display: inline-grid;
+  grid-template-columns: repeat(5, auto);
+}
+
+.grid-item{
+  padding: 0px 10px 0px 10px;
+}

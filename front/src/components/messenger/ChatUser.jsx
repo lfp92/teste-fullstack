@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ChatUser.css'
 import openSocket from 'socket.io-client';
 
 const socket = openSocket('localhost:4000');

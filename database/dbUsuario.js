@@ -3,7 +3,7 @@ const { executeQuery } = require('./utils')
 function addUsuario(nome, email, celular, senha) {
     return executeQuery(`insert into usuarios 
                         (usuario_nome, usuario_email, usuario_celular, usuario_senha)
-                        values (?,?,?,?)`, [nome, email, celular, senha])
+                        values (?,?,?,md5(?))`, [nome, email, celular, senha])
 }
 
 function changePassword(novaSenha, id) {
