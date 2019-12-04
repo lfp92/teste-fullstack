@@ -11,7 +11,8 @@ export default class UsuariosList extends React.Component {
         this.state = {
             ADD: null,
             EDIT: null,
-            list: null
+            list: null,
+            hidden: true
         }
     }
 
@@ -48,19 +49,32 @@ export default class UsuariosList extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {this.state.ADD}
-                {this.state.EDIT}
-                {this.state.ADD || this.state.EDIT ?
-                    null :
-                    <React.Fragment>
-                        <div><button onClick={this.adicionar}>Novo</button></div>
-                        <div className="grid-container">
-                            {this.state.list}
-                        </div>
-                        <div className='legenda'>Legenda: <span className='red'>Administradores</span> / Usuários</div>
-                    </React.Fragment>
+                <div className="usuarioList">
+                    {this.state.ADD}
+                    {this.state.EDIT}
+                    {this.state.ADD || this.state.EDIT ?
+                        null :
+                        <React.Fragment>
 
-                }
+                            <div className="barra-popup" onClick={() => this.setState({ hidden: !(this.state.hidden) })}>Administração de Usuários (clique para {this.state.hidden ? 'expandir':'reduzir'})</div>
+                            <div className="body" hidden={this.state.hidden}>
+                                <div><button onClick={this.adicionar}>Novo Usuário</button></div>
+                                <div className="grid-container">
+                                    <div className='grid-item title'>ID</div>
+                                    <div className='grid-item title'>Nome</div>
+                                    <div className='grid-item title'>Email</div>
+                                    <div className='grid-item title'>Celular</div>
+                                    <div className='grid-item title'></div>
+
+                                    {this.state.list}
+                                </div>
+                                <div className='legenda'>Legenda: <span className='red'>Administradores</span> / Usuários</div>
+                            </div>
+
+                        </React.Fragment>
+
+                    }
+                </div>
             </React.Fragment>);
     }
 }
@@ -69,10 +83,10 @@ function Item({ u, clickEditar }) {
     let classname = u.nivel === 1 ? 'grid-item red' : 'grid-item'
     return (
         <React.Fragment>
-            <div className={classname}>ID: {u.id}</div>
-            <div className={classname}>Nome: {u.nome}</div>
-            <div className={classname}>Email: {u.email}</div>
-            <div className={classname}>Celular: {u.celular}</div>
-            <div className={classname}><button onClick={() => clickEditar(u.id)}>Editar</button></div>
+            <div className={`${classname} text`}>{u.id}</div>
+            <div className={`${classname} text`}>{u.nome}</div>
+            <div className={`${classname} text`}>{u.email}</div>
+            <div className={`${classname} text`}>{u.celular}</div>
+            <div className={`${classname}`}><button onClick={() => clickEditar(u.id)}>Editar</button></div>
         </React.Fragment>);
 }

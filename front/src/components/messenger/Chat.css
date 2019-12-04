@@ -1,13 +1,39 @@
 .texto, .msg {
-    background-color: #fff;
+    /* background-color: #fff; */
     width: 40vw;
 }
 
+
+.msg-header {
+    color: #000000b7;
+
+}
 .msg {
     margin-top: 10px;
 }
 
 .chat {
-    background-color: #917391;
-    height: 400px;
+    /* background-color: #ffffff; */
+    border: 1px solid;
+    width: 96%;
+    margin-right: 1vw;
+    height: fit-content;
+    padding: 1vw;
+    overflow: auto;
+    max-height: 40%;
+    margin-top: 2vw;
+}
+
+.texto{
+    max-height: 25vh !important;
+    width: 100%;
+    background-color: #fff;
+    font-size: .8em;
+    overflow: auto;
+}
+
+.inputTexto {
+    position: relative;
+    bottom: 0px;
+    width: 100%;
 }

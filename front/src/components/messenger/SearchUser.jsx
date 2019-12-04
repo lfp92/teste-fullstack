@@ -1,8 +1,3 @@
-/**
- * Não implementado
- */
-
-
 import React, { useState } from 'react';
 import { searchUser } from '../../services/services';
 

@@ -1,0 +1,28 @@
+@keyframes up {
+    0% { height: 0vh; }
+    50% { height: 25vh; }
+    0% { height: 0vh; }
+}
+
+.popup {
+    background-color: brown;
+    position: fixed;
+    width: 25vw;
+    height: 25vh;
+    right: 0px;
+    bottom: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+    animation-name: up;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    animation-play-state: paused;
+    animation-duration: 1s;
+}
+
+.texto {
+    margin: 20px;
+    color: aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

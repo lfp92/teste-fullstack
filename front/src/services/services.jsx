@@ -37,6 +37,7 @@ function getHistory(idUsuario, idDestinatario) {
     return request(`/mensagem/get?idUsuario=${idUsuario}&idDestinatario=${idDestinatario}`, 'GET');
 }
 
+
 function login(email, senha) {
     return request('/usuario/login', 'POST', { email, senha });
 }
@@ -45,8 +46,12 @@ function listUsers() {
     return request('/usuario/list', 'GET');
 }
 
+function recentChats(id) {
+    return request(`/mensagem/recent?id=${id}`, 'GET');
+}
+
 function searchUser(pesquisa, id) {
     return request(`/usuario/search?pesquisa=${pesquisa}&id=${id}`, 'GET');
 }
 
-export { addUser, changePassword, deleteUser, editUser, getUser, getHistory, login, listUsers, searchUser }
+export { addUser, changePassword, deleteUser, editUser, getUser, getHistory, login, listUsers, recentChats, searchUser }

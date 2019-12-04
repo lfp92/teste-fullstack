@@ -1,14 +1,50 @@
 .login-container {
-    border: 1px solid green;
+    border: 1px solid #00000049;
+    background-color: #ffffff96;
     padding: 1vw;
     border-radius: 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: repeat(3, 4.5vh);
-    width: 20vw;
+    width: 50vw;
+    height: 20vh;
     margin: 0 auto;
 }
 
 .login-container input {
     padding: .1vw;
+}
+
+.semCadastro{
+    width: 48%;
+    margin-left: 1%;
+    background-image: linear-gradient(#8a02c9d3, #630291);
+}
+
+.semCadastro:hover{
+    background-image: linear-gradient(#8a02c9a9, #640291a2);
+}
+
+.semCadastro:active{
+    background-image: linear-gradient(#640192d3, #460166);
+}
+
+
+
+.loginButton {
+    background-image: linear-gradient(#23da35,#1da12af3);
+    width: 48%;
+    margin-left: 1%;
+}
+
+.loginButton:hover {
+    background-image: linear-gradient(#46da55e1, #008b0c80);
+}
+
+.loginButton:active{
+    background-image: linear-gradient(#005507c7, #014607c0);
+}
+
+.aviso {
+    color: #d40707;
 }

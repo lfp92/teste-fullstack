@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `mensagens` (
   KEY `destinatario_id` (`destinatario_id`),
   CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `mensagens_ibfk_2` FOREIGN KEY (`destinatario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nv_usuario` int(11) DEFAULT 0,
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `UK_USUARIO_EMAIL` (`usuario_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
 

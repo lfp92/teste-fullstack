@@ -8,7 +8,7 @@ let isLogged = false;
 
 let i = 0;
 
-export default function ({ remetente, destinatario, todos, setTodos }) {
+export default function ({ chatGlobal = null, remetente, destinatario, todos, setTodos }) {
     let [message, setMessage] = useState('');
 
     if (!isLogged) {
@@ -18,15 +18,24 @@ export default function ({ remetente, destinatario, todos, setTodos }) {
 
     socket.on('receivedMessage', (data) => {
         let { from, msg, hora } = data;
-        alert(`${from.nome} disse: ${msg.substr(0, 10)}`)
     });
+
+    socket.on('receivedMessageGlobal', data => {
+        let { from, msg, hora } = data;
+        let arr = todos.map(e => e);
+        arr.push(<Message mensagem={msg} usuario={from.nome} hora={(new Date(hora)).toLocaleString('pt-BR')} key={`globalChat${i++}`} />);
+        setTodos(arr)
+    })
 
 
     const addMessage = () => {
         let arr = todos.map(e => e);
         arr.push(<Message mensagem={message} usuario={remetente.nome} hora={new Date()} key={i++} />);
-
-        socket.emit('sendMessageToUser', { message, from: remetente, to: destinatario, hora: new Date() });
+        if (chatGlobal) {
+            socket.emit('sendMessageToChat', { message, from: remetente, hora: new Date() });
+        } else {
+            socket.emit('sendMessageToUser', { message, from: remetente, to: destinatario, hora: new Date() });
+        }
 
         setTodos(arr);
         setMessage('');
@@ -38,11 +47,19 @@ export default function ({ remetente, destinatario, todos, setTodos }) {
         }
     }
 
-    return destinatario ? (
+    return chatGlobal ?
         <div className="chat">
-            Conversa com {destinatario.nome} {socket.id}: <br />
+            Conversa Global: <br />
             <div className="texto">{todos}</div>
-            <input type="texto" onKeyUp={e => handleEnter(e)} onChange={(e) => setMessage(e.target.value)} placeholder="Digite sua mensagem" value={message} />
+            <input className="inputTexto" type="texto" onKeyUp={e => handleEnter(e)} onChange={(e) => setMessage(e.target.value)} placeholder="Digite sua mensagem" value={message} />
             <button onClick={addMessage}>Enviar</button>
-        </div>) : null;
+        </div>
+        :
+        (destinatario ? (
+            <div className="chat">
+                Conversa com {destinatario.nome}: <br />
+                <div className="texto">{todos}</div>
+                <input className="inputTexto" type="texto" onKeyUp={e => handleEnter(e)} onChange={(e) => setMessage(e.target.value)} placeholder="Digite sua mensagem" value={message} />
+                <button onClick={addMessage}>Enviar</button>
+            </div>) : null);
 }

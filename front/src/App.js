@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import UsuarioList from './components/admin/UsuarioList';
-import UsuarioDetails from './components/admin/UsuarioDetails';
 import Login from './components/Login';
-import Chat from './components/messenger/Chat';
 import './App.css';
 import Principal from './components/Principal';
 
@@ -15,7 +12,7 @@ function App() {
     <div className="App">
       {!autenticado ?
         <Login autenticado={autenticado} setAutenticado={setAutenticado} setUsuario={setUsuario} /> :
-        <Principal usuario={usuario} />
+        <Principal usuario={usuario} setAutenticado={setAutenticado} />
       }
     </div>
   );

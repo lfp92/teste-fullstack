@@ -10,10 +10,19 @@ const dbUsuario = require('../database/dbUsuario');
 
 
 router.post('/add', function (req, res) {
-    let { nome, email, celular, senha } = req.body;
+    let { nome, email, celular, senha, nivel } = req.body;
     dbUsuario.addUsuario(nome, email, celular, senha, nivel)
-        .then(results => res.send(results.affectedRows > 0 ? { status: 'OK', mensagem: 'Registro inserido com sucesso!' } : { status: 'erro', mensagem: 'Erro ao inserir registro' }))
-        .catch(error => res.send(error));
+        .then(results => {
+            console.log(results)
+            res.send(results.affectedRows > 0 ? { status: 'OK', mensagem: 'Registro inserido com sucesso!' } : { status: 'erro', mensagem: 'Erro ao inserir registro' })
+        })
+        .catch(error => {
+            if (error.code === 'ER_DUP_ENTRY') {
+                res.send({ status: 'ERRO', mensagem: 'Email já cadastrado!' })
+            } else {
+                res.send(error)
+            }
+        });
 });
 
 router.post('/changePassword', function (req, res) {

@@ -12,6 +12,7 @@ const dbMensagem = require('./database/dbMensagem');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.set(express.static(`${__dirname}/public`))
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Origin');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -21,18 +22,18 @@ app.use((req, res, next) => {
 });
 
 let loggedUsers = [];
-let messages = [];
 
 io.on('connection', function (socket) {
     socket.on('userLoggedIn', data => {
         let user = { ...data }
         user.socketId = socket.id;
-        loggedUsers.push(user)
+        let arr = loggedUsers.filter(x => x.id !== user.id);
+        arr.push(user)
+        loggedUsers = arr;
     });
 
     socket.on('sendMessageToUser', data => {
         let { message, from, to, hora } = data;
-        messages.push(data);
         dbMensagem.saveMessage(from.id, message, to.id)
             .then(response => {
                 let arr = loggedUsers.filter(x => x.id === to.id);
@@ -42,6 +43,14 @@ io.on('connection', function (socket) {
                 }
             })
             .catch(error => console.log(error));
+    })
+
+    socket.on('sendMessageToChat', data => {
+        let { message, from, hora } = data;
+        dbMensagem.saveMessage(from.id, message, null)
+            .then(response => {
+                socket.broadcast.emit('receivedMessageGlobal', { from, msg: message, hora })
+            })
     })
 });
 

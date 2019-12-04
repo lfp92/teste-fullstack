@@ -6,26 +6,46 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 10px;
+  background-image: linear-gradient(#afafaf96, #41414293);
+  width: 100%;
+  min-height: 98vh; 
+  overflow-x: hidden;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+input[type="text"], input[type="password"]{
+  padding: 1vh !important;
+  width: 97%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-/* 
+
 button {
-  border: 0px;
-  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  background-image: linear-gradient(#ffffff3f, #00000027);
+  color: #ffffff;
   font-weight: bold;
-  background-repeat: ;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: larger;
+  font-size: large;
   padding: 1vh 1vw 1vh 1vw;
   min-width: 8vw;
-  outline: none;
-  background-color: rgba(105, 29, 29, 0.993);
+  width: auto;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  outline: none;  
+  border-style: none;
+  background-image: linear-gradient(#005ce6d3, #005ce6);
 }
 
 button:hover {
-  background-color: rgb(199, 53, 53);
-} */
+  background-image: linear-gradient(#005ce6b2, #005ce6c7);
+}
+
+button:active{
+  border-style: none;
+  background-image: linear-gradient(#0043a7, #013e99);
+}

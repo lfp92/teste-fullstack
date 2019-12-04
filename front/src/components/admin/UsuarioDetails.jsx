@@ -5,13 +5,14 @@ class UsuarioDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            usuarioSemCadastro: props.usuarioSemCadastro || null,
             ADD: props.id ? false : true,
             EDIT: props.id ? true : false,
             id: props.id || null,
             nome: '',
             email: '',
             celular: '',
-            nivel: '',
+            nivel: 0,
             senha: '',
             senhaRepetida: '',
         }
@@ -82,10 +83,12 @@ class UsuarioDetails extends React.Component {
                 <div>Celular: <input type="text" onChange={(e) => this.setState({ celular: e.target.value })} value={this.state.celular}></input></div>
                 <div>Nova senha: <input type="password" onChange={(e) => this.setState({ senha: e.target.value })} value={this.state.senha}></input></div>
                 <div>Repetir senha: <input type="password" onChange={(e) => this.setState({ senhaRepetida: e.target.value })} value={this.state.senhaRepetida}></input></div>
-                <div>Nível: <select value={this.state.nivel} onChange={e => this.setState({ nivel: e.target.value })}>
-                    <option value={0}>Usuário</option>
-                    <option value={1}>Administrador</option>
-                </select></div>
+                {this.state.usuarioSemCadastro ?
+                    null :
+                    <div>Nível: <select value={this.state.nivel} onChange={e => this.setState({ nivel: e.target.value })}>
+                        <option value={0}>Usuário</option>
+                        <option value={1}>Administrador</option>
+                    </select></div>}
                 <div><button onClick={this.props.voltar}>Voltar</button></div>
                 <div><button onClick={this.salvar}>Salvar</button></div>
                 {this.state.EDIT ? <div><button onClick={this.delete}>Excluir</button></div> : null}
