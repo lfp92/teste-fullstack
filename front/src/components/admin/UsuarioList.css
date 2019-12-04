@@ -7,3 +7,13 @@
 .grid-item{
   padding: 0px 10px 0px 10px;
 }
+
+.red {
+  color: red;
+}
+
+.legenda {
+  border: 1px solid;
+  margin-top: 2vh;
+  padding: 1vw;
+}

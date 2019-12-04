@@ -11,6 +11,7 @@ class UsuarioDetails extends React.Component {
             nome: '',
             email: '',
             celular: '',
+            nivel: '',
             senha: '',
             senhaRepetida: '',
         }
@@ -29,21 +30,21 @@ class UsuarioDetails extends React.Component {
     }
 
     salvar = () => {
-        let { ADD, EDIT, id, nome, email, celular, senha, senhaRepetida } = this.state;
+        let { ADD, EDIT, id, nome, email, celular, nivel, senha, senhaRepetida } = this.state;
         if (senha !== senhaRepetida) {
             alert('Senhas não coincidem.');
             this.setState({ senha: '', senhaRepetida: '' })
             return;
         }
         if (ADD) {
-            addUser(nome, email, celular, senha)
+            addUser(nome, email, celular, senha, nivel)
                 .then(response => {
                     alert(response.mensagem);
                     this.props.voltar();
                 })
                 .catch(error => alert(error))
         } else if (EDIT) {
-            editUser(nome, email, celular, id)
+            editUser(nome, email, celular, nivel, id)
                 .then(response => {
                     if (senha !== '') {
                         changePassword(senha, id)
@@ -65,8 +66,8 @@ class UsuarioDetails extends React.Component {
         if (id) {
             getUser(id)
                 .then(response => {
-                    let { nome, email, celular } = response[0];
-                    this.setState({ nome: nome || '', email: email || '', celular: celular || '' })
+                    let { nome, email, celular, nivel } = response[0];
+                    this.setState({ nome: nome || '', email: email || '', celular: celular || '', nivel: nivel || 0 })
                 })
                 .catch(error => alert(error))
         }
@@ -81,6 +82,10 @@ class UsuarioDetails extends React.Component {
                 <div>Celular: <input type="text" onChange={(e) => this.setState({ celular: e.target.value })} value={this.state.celular}></input></div>
                 <div>Nova senha: <input type="password" onChange={(e) => this.setState({ senha: e.target.value })} value={this.state.senha}></input></div>
                 <div>Repetir senha: <input type="password" onChange={(e) => this.setState({ senhaRepetida: e.target.value })} value={this.state.senhaRepetida}></input></div>
+                <div>Nível: <select value={this.state.nivel} onChange={e => this.setState({ nivel: e.target.value })}>
+                    <option value={0}>Usuário</option>
+                    <option value={1}>Administrador</option>
+                </select></div>
                 <div><button onClick={this.props.voltar}>Voltar</button></div>
                 <div><button onClick={this.salvar}>Salvar</button></div>
                 {this.state.EDIT ? <div><button onClick={this.delete}>Excluir</button></div> : null}

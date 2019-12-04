@@ -57,19 +57,22 @@ export default class UsuariosList extends React.Component {
                         <div className="grid-container">
                             {this.state.list}
                         </div>
+                        <div className='legenda'>Legenda: <span className='red'>Administradores</span> / Usuários</div>
                     </React.Fragment>
+
                 }
             </React.Fragment>);
     }
 }
 
 function Item({ u, clickEditar }) {
+    let classname = u.nivel === 1 ? 'grid-item red' : 'grid-item'
     return (
         <React.Fragment>
-            <div className="grid-item">ID: {u.id}</div>
-            <div className="grid-item">Nome: {u.nome}</div>
-            <div className="grid-item">Email: {u.email}</div>
-            <div className="grid-item">Celular: {u.celular}</div>
-            <div className="grid-item"><button onClick={() => clickEditar(u.id)}>Editar</button></div>
+            <div className={classname}>ID: {u.id}</div>
+            <div className={classname}>Nome: {u.nome}</div>
+            <div className={classname}>Email: {u.email}</div>
+            <div className={classname}>Celular: {u.celular}</div>
+            <div className={classname}><button onClick={() => clickEditar(u.id)}>Editar</button></div>
         </React.Fragment>);
 }

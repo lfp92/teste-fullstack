@@ -11,7 +11,7 @@ const dbUsuario = require('../database/dbUsuario');
 
 router.post('/add', function (req, res) {
     let { nome, email, celular, senha } = req.body;
-    dbUsuario.addUsuario(nome, email, celular, senha)
+    dbUsuario.addUsuario(nome, email, celular, senha, nivel)
         .then(results => res.send(results.affectedRows > 0 ? { status: 'OK', mensagem: 'Registro inserido com sucesso!' } : { status: 'erro', mensagem: 'Erro ao inserir registro' }))
         .catch(error => res.send(error));
 });
@@ -31,8 +31,8 @@ router.post('/delete', function (req, res) {
 })
 
 router.post('/edit', function (req, res) {
-    let { nome, email, celular, id } = req.body;
-    dbUsuario.editUsuario(nome, email, celular, id)
+    let { nome, email, celular, nivel, id } = req.body;
+    dbUsuario.editUsuario(nome, email, celular, nivel, id)
         .then(results => res.send(results.affectedRows > 0 ? { status: 'OK', mensagem: 'Registro atualizado com sucesso!' } : { status: 'erro', mensagem: 'Erro ao editar registro' }))
         .catch(error => res.send(error));
 })
@@ -43,6 +43,7 @@ router.get('/get', function (req, res) {
         .then(results => res.send(results))
         .catch(error => res.send(error));
 });
+
 
 router.post('/login', function (req, res) {
     let { email, senha } = req.body;
@@ -63,5 +64,12 @@ router.get('/list', function (req, res) {
         .catch(error => res.send(error));
 });
 
+
+router.get('/search', function (req, res) {
+    let { pesquisa, id } = req.query;
+    dbUsuario.searchUser(pesquisa, id)
+        .then(results => res.send(results))
+        .catch(error => res.send(error));
+});
 
 module.exports = router;

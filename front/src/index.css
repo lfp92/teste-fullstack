@@ -12,4 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* 
+button {
+  border: 0px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-repeat: ;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: larger;
+  padding: 1vh 1vw 1vh 1vw;
+  min-width: 8vw;
+  outline: none;
+  background-color: rgba(105, 29, 29, 0.993);
+}
 
+button:hover {
+  background-color: rgb(199, 53, 53);
+} */

@@ -5,7 +5,9 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const rotaUsuario = require('./routes/usuario');
+const rotaMensagem = require('./routes/mensagem');
 const bodyParser = require('body-parser');
+const dbMensagem = require('./database/dbMensagem');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,19 +20,33 @@ app.use((req, res, next) => {
     next();
 });
 
-io.on('connection', function (socket) {
+let loggedUsers = [];
+let messages = [];
 
-    socket.on('loggedIn', usuario => {
-        usuario.socketId = socket.id;
-        console.log(usuario)
+io.on('connection', function (socket) {
+    socket.on('userLoggedIn', data => {
+        let user = { ...data }
+        user.socketId = socket.id;
+        loggedUsers.push(user)
     });
 
-    socket.on('sendMessage', message => {
-        socket.broadcast.emit('receivedMessage', message);
+    socket.on('sendMessageToUser', data => {
+        let { message, from, to, hora } = data;
+        messages.push(data);
+        dbMensagem.saveMessage(from.id, message, to.id)
+            .then(response => {
+                let arr = loggedUsers.filter(x => x.id === to.id);
+                if (arr.length > 0) {
+                    let toId = arr[0].socketId
+                    socket.broadcast.to(toId).emit('receivedMessage', { from, msg: message, hora: hora.toLocaleString() || null });
+                }
+            })
+            .catch(error => console.log(error));
     })
 });
 
 app.use('/usuario', rotaUsuario);
+app.use('/mensagem', rotaMensagem);
 
 app.listen(3001, function () {
     console.log(`Server on às ${(new Date()).toLocaleString()}`);
